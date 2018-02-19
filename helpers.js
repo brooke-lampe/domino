@@ -1,34 +1,35 @@
+/* eslint-disable no-unused-vars, semi */
+
 module.exports = {
-    readDominoesFile:readDominoesFile
+  readDominoesFile: readDominoesFile, flip
 }
 
-function readDominoesFile(file) {
-	
-    var text;
-    var lines = [];
-    var rows = [];
-    var filesystem = require('fs');
+function readDominoesFile (file) {
+  var text;
+  var lines = [];
+  var rows = [];
+  var filesystem = require('fs');
 
-    text = filesystem.readFileSync(file);
-    rows = text.toString().split("\n");
-    rows.pop();
-    
-    for(var r = 0; r < rows.length; r++) {
-	rows[r] = rows[r].split(";");
-	for(var c = 0; c < rows[r].length; c++) {
-	    rows[r][c] = rows[r][c].split(",");
-	    rows[r][c][0] = parseInt(rows[r][c][0]);
-	    rows[r][c][1] = parseInt(rows[r][c][1]);
-	}
+  text = filesystem.readFileSync(file);
+  rows = text.toString().split('\n');
+  rows.pop();
+
+  for (var r = 0; r < rows.length; r++) {
+    rows[r] = rows[r].split(';');
+    for (var c = 0; c < rows[r].length; c++) {
+      rows[r][c] = rows[r][c].split(',');
+      rows[r][c][0] = parseInt(rows[r][c][0]);
+      rows[r][c][1] = parseInt(rows[r][c][1]);
     }
+  }
 
-    return rows;
+  return rows;
 }
 
-function flip(domino) {
-	var tempVariable = domino[0];
-	domino[0] = domino[1];
-	domino[1] = tempVariable;
-	
-	return domino;
+function flip (domino) {
+  var tempVariable = domino[0];
+  domino[0] = domino[1];
+  domino[1] = tempVariable;
+
+  return domino;
 }
